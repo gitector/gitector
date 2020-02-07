@@ -27,6 +27,10 @@ jobs:
     - name: Build
       run: go build -v .
 
+
     - name: Test
-      run: ./test.sh
+      run: |
+        git config --global user.email "test@gitector.dev"
+        git config --global user.name "Test gitector"
+        ./test.sh
 
