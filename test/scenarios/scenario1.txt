@@ -1,0 +1,9 @@
+Running on directory: "." comparing branches: "master.." 
+[0;33mCouldn't read config. Generating default one[0m
+==== Found errors: ====
+[0;31mCommit Title is too long[0m: this is too long message written inside commit written fo contain more than 72 characters new-feature3
+[0;31mCommit Title is too long[0m: this is too long message written inside commit written fo contain more than 72 characters new-feature2
+[0;31mCommit Title is too long[0m: this is too long message written inside commit written fo contain more than 72 characters new-feature1
+==== Summary: ====
+[0;31m3 errors found 
+[0m

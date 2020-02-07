@@ -1,0 +1,28 @@
+test:
+  image: golang:1.13.5
+  stage: test
+  script:
+    - go build
+    - apt-get install git
+    - git config --global user.email "test@gitector.dev"
+    - git config --global user.name "Test gitector"
+    - ./test.sh
+  artifacts:
+    paths:
+      - gitector
+    expire_in: 1 week
+
+build_docker:
+  image: docker:19.03.1
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_USERNAME: $DOCKER_USERNAME
+    DOCKER_PASSWORD: $DOCKER_PASSWORD
+  services:
+    - docker:19.03.1-dind
+  before_script:
+    - docker info
+  script:
+    - docker login --username $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - docker build -t gitector/gitector:latest .
+    - docker push gitector/gitector:latest
