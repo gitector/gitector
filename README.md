@@ -40,28 +40,23 @@ Run `gitector` by default it will compare new commits against master.
 
 ## CI Usage
 
+### Github Actions
+
+You can find latest version to add to your [workflow here](https://github.com/gitector/gitector-actions)
+
 ### Gitlab
 
+Add code below to your `.gitlab-ci.yml` file
+
 ```
-stages:
-  - gitector
-  - build
-  - deploy
-
-before_script:
-  - wget link > gitector
-
 gitector:
+  stage: build
   image: gitector/gitector
   script:
     - git fetch
     - gitector
-  only:
-    refs:
-      - merge_requests
-      - master
-      - web
-
+  except:
+    - master
 
 ```
 
