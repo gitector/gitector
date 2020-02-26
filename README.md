@@ -6,7 +6,7 @@ Lint your messages
 
 ### Download binary
 
-`wget link_here `
+Go to [releases section](https://github.com/gitector/gitector/releases)
 
 ### From surouce
 
