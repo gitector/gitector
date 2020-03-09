@@ -15,6 +15,7 @@ type GitCommit struct {
 	Description string
 	RawMessage  string
 	Signature   Signature
+	FilesCount  int
 }
 
 type Signature struct {
