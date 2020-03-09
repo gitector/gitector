@@ -40,5 +40,9 @@ func singleCommit(description reader.GitCommit, config ProjectConfig) []GitError
 		errors = append(errors, EmptyLineBetweenError(description))
 	}
 
+	if config.noTrailingPunctuationInTitle && !CheckForTrailingPunctuationInTitle(description.Title) {
+		errors = append(errors, CheckForTrailingPunctuationInTitleError(description.Title, description))
+	}
+
 	return errors
 }

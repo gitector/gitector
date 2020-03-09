@@ -10,9 +10,10 @@ import (
 )
 
 type ProjectConfig struct {
-	emailDomains  []string
-	maxCharacters int
-	ticketRegexp  string
+	emailDomains                 []string
+	maxCharacters                int
+	ticketRegexp                 string
+	noTrailingPunctuationInTitle bool
 }
 
 var k = koanf.New(".")
