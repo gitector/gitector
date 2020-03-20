@@ -1,6 +1,7 @@
 package reader
 
 import (
+	"fmt"
 	"golang.org/x/net/http2"
 	. "gopkg.in/src-d/go-git.v4"
 	. "gopkg.in/src-d/go-git.v4/_examples"
@@ -37,13 +38,16 @@ func extractBranches(scope string) (string, string) {
 }
 
 func getHashFromBranchName(r *Repository, branchName string) plumbing.Hash {
+	fmt.Print("Checking branch: ")
+	fmt.Println(branchName)
 	if branchName == "" {
 		c, _ := r.Head()
 		return c.Hash()
 	} else {
 		ref, error := r.Reference(plumbing.ReferenceName("refs/heads/"+branchName), true)
 		if error != nil {
-			ref, _ = r.Reference(plumbing.ReferenceName("refs/remotes/origin/"+branchName), true)
+			ref, error = r.Reference(plumbing.ReferenceName("refs/remotes/origin/"+branchName), true)
+			fmt.Errorf(error.Error())
 		}
 		return ref.Hash()
 	}
