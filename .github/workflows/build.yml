@@ -15,7 +15,11 @@ jobs:
 
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
-    
+
+    - name: Test
+      run: |
+        git show-ref
+
     - name: Gitector
       uses: gitector/gitector-actions@v1
 
