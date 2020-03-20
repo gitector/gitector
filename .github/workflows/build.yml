@@ -15,7 +15,12 @@ jobs:
 
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
-    
+
+    - name: Fetch other branches
+      run: |
+        git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+        git show-ref
+
     - name: Gitector
       uses: gitector/gitector-actions@v1
 
