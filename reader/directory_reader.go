@@ -44,6 +44,12 @@ func getHashFromBranchName(r *Repository, branchName string) plumbing.Hash {
 		c, _ := r.Head()
 		return c.Hash()
 	} else {
+		fmt.Println("refs/heads/" + branchName)
+		iter, _ := r.References()
+		iter.ForEach(func(reference *plumbing.Reference) error {
+			fmt.Println("Ref: " + reference.Name())
+			return nil
+		})
 		ref, error := r.Reference(plumbing.ReferenceName("refs/heads/"+branchName), true)
 		if error != nil {
 			ref, error = r.Reference(plumbing.ReferenceName("refs/remotes/origin/"+branchName), true)
