@@ -8,6 +8,12 @@ Lint your messages
 
 Go to [releases section](https://github.com/gitector/gitector/releases)
 
+### Brew
+
+- `brew tap gitector/gitector` <- Add external tap with gitector
+- `brew install gitector` <- install gitector
+
+
 ### From surouce
 
 - `make build` <- to build
