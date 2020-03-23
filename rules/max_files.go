@@ -8,6 +8,9 @@ import (
 type TooManyFilesInSingleCommit struct{}
 
 func CheckForMaxFiles(filesInCommit int, maxFiles int) bool {
+	if maxFiles == 0 {
+		return true
+	}
 	return filesInCommit <= maxFiles
 }
 
