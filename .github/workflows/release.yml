@@ -35,3 +35,9 @@ jobs:
           name: gitector/gitector
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      -
+        name: Publish to Github package
+        uses: mattdavis0351/actions/docker-gpr@v1
+        with:
+          repo-token: ${{ secrets.GH_TOKEN }}
+          image-name: gitector
