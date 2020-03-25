@@ -8,7 +8,14 @@ import (
 type TrailingPunctationInTitle struct{}
 
 func CheckForTrailingPunctuationInTitle(title string) bool {
-	return !strings.ContainsAny(title, ".")
+	parts := strings.Split(title, ".")
+	if len(parts) == 1 {
+		return true
+	}
+	if strings.TrimSpace(parts[len(parts)-1]) == "" {
+		return false
+	}
+	return true
 }
 
 func CheckForTrailingPunctuationInTitleError(commit reader.GitCommit) GitError {
