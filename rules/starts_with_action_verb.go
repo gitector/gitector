@@ -9,24 +9,28 @@ import (
 type NoActionVerb struct{}
 
 func extractFirstWord(title string) string {
-	r := regexp.MustCompile("[a-zA-Z]+")
-	return r.FindString(title)
+	words := strings.Split(title, " ")
+	isLetters := regexp.MustCompile(`^[a-zA-Z]+$`).MatchString
+	for _, word := range words {
+		if isLetters(word) {
+			return word
+		}
+	}
+	return ""
 }
 
 func contains(s string, arr []string) bool {
 	for _, word := range arr {
-		if word == s {
+		if strings.ToLower(word) == strings.ToLower(s) {
 			return true
 		}
 	}
 	return false
 }
 
-func StartsWithActionVerb(title string) bool {
-	ACTION_VERBS := []string{"add", "remove", "update", "fix", "move", "delete"}
-
+func StartsWithActionVerb(title string, acceptedActionVerbs []string) bool {
 	firstWord := extractFirstWord(title)
-	return contains(strings.ToLower(firstWord), ACTION_VERBS)
+	return contains(firstWord, acceptedActionVerbs)
 }
 
 func StartsWithActionVerbError(title string, commit reader.GitCommit) GitError {
