@@ -18,7 +18,7 @@ func ReadGitCommitsFromDirectory(directory string, scope string) []GitCommit {
 
 		var models []GitCommit
 		iterateOverCommon(r, getHashFromBranchName(r, a), getHashFromBranchName(r, b), func(c *object.Commit) error {
-			models = append(models, StringToModel(c.Message, Signature{Email: c.Author.Email, Name: c.Author.Name}))
+			models = append(models, StringToModel(c.Message, Signature{Email: c.Author.Email, Name: c.Author.Name}, countFilesInCommit(c)))
 			return nil
 		})
 		return models
@@ -77,4 +77,16 @@ func containsCommonCommit(r *Repository, commit *object.Commit, compared plumbin
 		return nil
 	})
 	return res
+}
+
+func countFilesInCommit(commit *object.Commit) int {
+	count := 0
+
+	files, _ := commit.Files()
+	files.ForEach(func(file *object.File) error {
+		count += 1
+		return nil
+	})
+
+	return count
 }

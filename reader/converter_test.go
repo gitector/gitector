@@ -21,9 +21,10 @@ and continues
 
 and continues
 `
-	commit := StringToModel(message, Signature{})
+	commit := StringToModel(message, Signature{}, 3)
 	assert.Equal(t, len(strings.Split(commit.Title, "\n")), 1)
 	assert.Equal(t, len(strings.Split(commit.Description, "\n")), 13)
+	assert.Equal(t, commit.FilesCount, 3)
 }
 
 func TestSplitsCorrectlyTitleFromMessageWhenNoBreak(t *testing.T) {
@@ -35,7 +36,7 @@ body continues
 and continues
 and continues
 `
-	commit := StringToModel(message, Signature{})
+	commit := StringToModel(message, Signature{}, 0)
 	assert.Equal(t, len(strings.Split(commit.Title, "\n")), 1)
 	assert.Equal(t, len(strings.Split(commit.Description, "\n")), 7)
 }
