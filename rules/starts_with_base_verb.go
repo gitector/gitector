@@ -2,9 +2,12 @@ package rules
 
 import (
 	"github.com/gobuffalo/packr"
+	"gitlab.com/tbacompany/gitector/reader"
 	"gitlab.com/tbacompany/gitector/utils"
 	"strings"
 )
+
+type NoBaseVerb struct{}
 
 var wordsBox = packr.NewBox("./words")
 
@@ -27,4 +30,13 @@ func oneOfIrregularVerbs(word string) bool {
 
 func endsWithEdOrIng(word string) bool {
 	return strings.HasSuffix(word, "ed") || strings.HasSuffix(word, "ing")
+}
+
+func StartsWithBaseVerbError(title string, commit reader.GitCommit) GitError {
+	return GitError{
+		ErrorType:   NoBaseVerb{},
+		Title:       "Commit doesn't start with base verb",
+		Description: "Commit should start with base verb",
+		Commit:      commit,
+	}
 }
