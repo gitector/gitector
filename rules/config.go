@@ -14,6 +14,7 @@ type ProjectConfig struct {
 	maxCharacters                int
 	ticketRegexp                 string
 	noTrailingPunctuationInTitle bool
+	maxFiles                     int
 }
 
 var k = koanf.New(".")

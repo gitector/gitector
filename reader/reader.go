@@ -15,6 +15,7 @@ type GitCommit struct {
 	Description string
 	RawMessage  string
 	Signature   Signature
+	FilesCount  int
 }
 
 type Signature struct {
@@ -26,6 +27,6 @@ func ReadGitCommits(configParams InitParams) []GitCommit {
 	if !configParams.UsingDirectInput {
 		return ReadGitCommitsFromDirectory(configParams.Directory, configParams.Scope)
 	} else {
-		return ReadDirectInput()
+		return ReadDirectInput(configParams.Directory)
 	}
 }
