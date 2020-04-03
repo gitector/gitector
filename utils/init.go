@@ -10,7 +10,10 @@ var defaultConfig = []byte(`
   "allowed_domains": [],
   "title_max_characters": 72,
   "ticket_regexp": "",
-   "no_trailing_punctuation_in_title": true
+  "no_trailing_punctuation_in_title": true,
+  "max_files": 0,
+  "starts_with_verb": true
+
 }
 `)
 
