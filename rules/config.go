@@ -15,6 +15,7 @@ type ProjectConfig struct {
 	ticketRegexp                 string
 	noTrailingPunctuationInTitle bool
 	maxFiles                     int
+	startsWithVerb               bool
 }
 
 var k = koanf.New(".")
@@ -37,9 +38,12 @@ func ReadConfig(directory string) ProjectConfig {
 	}
 
 	config := ProjectConfig{
-		emailDomains:  k.Strings("allowed_domains"),
-		maxCharacters: k.Int("title_max_characters"),
-		ticketRegexp:  k.String("ticket_regexp"),
+		emailDomains:                 k.Strings("allowed_domains"),
+		maxCharacters:                k.Int("title_max_characters"),
+		ticketRegexp:                 k.String("ticket_regexp"),
+		noTrailingPunctuationInTitle: k.Bool("no_trailing_punctuation_in_title"),
+		maxFiles:                     k.Int("max_files"),
+		startsWithVerb:               k.Bool("starts_with_verb"),
 	}
 
 	return config

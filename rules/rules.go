@@ -54,5 +54,9 @@ func singleCommit(description reader.GitCommit, config ProjectConfig) []GitError
 		errors = append(errors, CheckForMaxFilesError(description.FilesCount, config.maxFiles, description))
 	}
 
+	if !StartsWithBaseVerb(description.Title) {
+		errors = append(errors, StartsWithBaseVerbError(description.Title, description))
+	}
+
 	return errors
 }
