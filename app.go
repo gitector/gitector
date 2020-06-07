@@ -80,6 +80,8 @@ func generateErrorOutput(format string, errors []rules.GitError) string {
 		return printer.GenerateHTML(errors)
 	case "markdown":
 		return printer.GenerateMarkdown(errors)
+	case "json":
+		return printer.GenerateJSON(errors)
 	default:
 		return printer.GenerateConsoleErrors(errors)
 	}
