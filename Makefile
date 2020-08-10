@@ -1,4 +1,4 @@
-build: gitector
+build:
 	go build
 
 install: build
