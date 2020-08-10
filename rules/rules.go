@@ -1,6 +1,7 @@
 package rules
 
 import (
+	"github.com/op/go-logging"
 	"gitlab.com/tbacompany/gitector/reader"
 	"strings"
 )
@@ -12,11 +13,14 @@ type GitError struct {
 	Commit      reader.GitCommit
 }
 
-func Rules(description []reader.GitCommit, directory string) []GitError {
+var log = logging.MustGetLogger("")
+
+func Rules(commits []reader.GitCommit, directory string) []GitError {
 	config := ReadConfig(directory)
 	var errors []GitError
-	for _, elem := range description {
-		foundErrors := singleCommit(elem, config)
+	for _, commit := range commits {
+		foundErrors := singleCommit(commit, config)
+		log.Debugf("Found %d issues for commit %s ", len(foundErrors), commit.Title)
 		errors = append(errors, foundErrors...)
 	}
 	return errors
