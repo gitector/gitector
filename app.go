@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/op/go-logging"
 
 	"github.com/urfave/cli"
 	"gitlab.com/tbacompany/gitector/printer"
@@ -39,9 +40,20 @@ func CreateNewApp() *cli.App {
 			Name:  "direct-input, di",
 			Usage: "Use direct input ",
 		},
+		cli.BoolFlag{
+			Name:  "verbose",
+			Usage: "Print additional debug info",
+		},
 	}
 
 	app.Action = func(c *cli.Context) error {
+		// Set logging level
+		if c.Bool("verbose") {
+			logging.SetLevel(logging.INFO, "")
+		} else {
+			logging.SetLevel(logging.DEBUG, "")
+		}
+
 		// gitScope is defined same way as git diff does it branch..branch or commit..commit
 		gitScope := "master.."
 		if c.NArg() > 0 {
