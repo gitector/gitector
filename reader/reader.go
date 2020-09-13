@@ -16,6 +16,7 @@ type GitCommit struct {
 	RawMessage  string
 	Signature   Signature
 	FilesCount  int
+	IsMerge     bool
 }
 
 type Signature struct {

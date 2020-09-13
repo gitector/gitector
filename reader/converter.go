@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-func StringToModel(message string, signature Signature, filesCount int) GitCommit {
+func StringToModel(message string, signature Signature, filesCount int, isMerge bool) GitCommit {
 	var res = strings.SplitN(message, "\n", 2)
 	if len(res) == 1 {
 		return GitCommit{Title: message, Description: "", Signature: signature, RawMessage: message}

@@ -23,5 +23,5 @@ func ReadDirectInput(directory string) []GitCommit {
 	rawAuthor := string(out)
 	commit, _ := ioutil.ReadFile(".git/COMMIT_EDITMSG")
 	rawCommit := string(commit)
-	return []GitCommit{StringToModel(rawCommit, GitVarToSignature(rawAuthor), changedFiles)}
+	return []GitCommit{StringToModel(rawCommit, GitVarToSignature(rawAuthor), changedFiles, false)}
 }

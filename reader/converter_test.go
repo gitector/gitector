@@ -21,7 +21,7 @@ and continues
 
 and continues
 `
-	commit := StringToModel(message, Signature{}, 3)
+	commit := StringToModel(message, Signature{}, 3, false)
 	assert.Equal(t, len(strings.Split(commit.Title, "\n")), 1)
 	assert.Equal(t, len(strings.Split(commit.Description, "\n")), 13)
 	assert.Equal(t, commit.FilesCount, 3)
@@ -36,7 +36,7 @@ body continues
 and continues
 and continues
 `
-	commit := StringToModel(message, Signature{}, 0)
+	commit := StringToModel(message, Signature{}, 0, false)
 	assert.Equal(t, len(strings.Split(commit.Title, "\n")), 1)
 	assert.Equal(t, len(strings.Split(commit.Description, "\n")), 7)
 }

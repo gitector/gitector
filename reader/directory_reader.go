@@ -18,7 +18,7 @@ func ReadGitCommitsFromDirectory(directory string, scope string) []GitCommit {
 
 		var models []GitCommit
 		iterateOverCommon(r, getHashFromBranchName(r, a), getHashFromBranchName(r, b), func(c *object.Commit) error {
-			models = append(models, StringToModel(c.Message, Signature{Email: c.Author.Email, Name: c.Author.Name}, countFilesInCommit(c)))
+			models = append(models, StringToModel(c.Message, Signature{Email: c.Author.Email, Name: c.Author.Name}, countFilesInCommit(c), isMergeCommit(c)))
 			return nil
 		})
 		return models
@@ -89,4 +89,8 @@ func countFilesInCommit(commit *object.Commit) int {
 	})
 
 	return count
+}
+
+func isMergeCommit(commit *object.Commit) bool {
+	return len(commit.ParentHashes) > 1
 }
