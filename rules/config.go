@@ -16,6 +16,7 @@ type ProjectConfig struct {
 	noTrailingPunctuationInTitle bool
 	maxFiles                     int
 	startsWithVerb               bool
+	forbidMerge                  bool
 }
 
 var k = koanf.New(".")
@@ -44,6 +45,7 @@ func ReadConfig(directory string) ProjectConfig {
 		noTrailingPunctuationInTitle: k.Bool("no_trailing_punctuation_in_title"),
 		maxFiles:                     k.Int("max_files"),
 		startsWithVerb:               k.Bool("starts_with_verb"),
+		forbidMerge:                  k.Bool("forbid_merge"),
 	}
 
 	return config

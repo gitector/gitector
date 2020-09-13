@@ -12,7 +12,8 @@ var defaultConfig = []byte(`
   "ticket_regexp": "",
   "no_trailing_punctuation_in_title": true,
   "max_files": 0,
-  "starts_with_verb": true
+  "starts_with_verb": true,
+  "forbid_merge": false
 
 }
 `)
