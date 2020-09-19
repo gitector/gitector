@@ -62,5 +62,9 @@ func singleCommit(description reader.GitCommit, config ProjectConfig) []GitError
 		errors = append(errors, StartsWithBaseVerbError(description.Title, description))
 	}
 
+	if ForbidMerges(description.IsMerge, config.forbidMerge) {
+		errors = append(errors, ContainsMergeCommitError(description))
+	}
+
 	return errors
 }
