@@ -29,7 +29,11 @@ func Rules(commits []reader.GitCommit, directory string) []GitError {
 func singleCommit(description reader.GitCommit, config ProjectConfig) []GitError {
 	var errors []GitError
 
-	// Skip if merge request
+	if ForbidMerges(description.IsMerge, config.forbidMerge) {
+		errors = append(errors, ContainsMergeCommitError(description))
+	}
+
+	// Skip rest checks if merge request
 	if strings.HasPrefix(description.Title, "Merge") {
 		return errors
 	}
@@ -60,10 +64,6 @@ func singleCommit(description reader.GitCommit, config ProjectConfig) []GitError
 
 	if !StartsWithBaseVerb(description.Title) {
 		errors = append(errors, StartsWithBaseVerbError(description.Title, description))
-	}
-
-	if ForbidMerges(description.IsMerge, config.forbidMerge) {
-		errors = append(errors, ContainsMergeCommitError(description))
 	}
 
 	return errors
