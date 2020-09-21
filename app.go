@@ -49,9 +49,9 @@ func CreateNewApp() *cli.App {
 	app.Action = func(c *cli.Context) error {
 		// Set logging level
 		if c.Bool("verbose") {
-			logging.SetLevel(logging.INFO, "")
-		} else {
 			logging.SetLevel(logging.DEBUG, "")
+		} else {
+			logging.SetLevel(logging.INFO, "")
 		}
 
 		// gitScope is defined same way as git diff does it branch..branch or commit..commit
